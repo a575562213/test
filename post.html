@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result"></div>
+    <script>
+        const result = document.querySelector('#result');
+        result.addEventListener('mouseover', function () {
+            console.log('test');
+
+            // 1.创建对象
+            const xhr = new XMLHttpRequest();
+            xhr.open('post', 'http://localthost:8000/server');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        result.innerHTML = xhr.response;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
